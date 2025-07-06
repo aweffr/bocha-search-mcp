@@ -78,7 +78,8 @@ async def bocha_web_search(
             "Content-Type": "application/json",
         }
 
-        async with httpx.AsyncClient() as client:
+        proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY") or os.environ.get("ALL_PROXY")
+        async with httpx.AsyncClient(proxy=proxy) as client:
             response = await client.post(
                 endpoint, headers=headers, json=payload, timeout=10.0
             )
@@ -151,7 +152,8 @@ async def bocha_ai_search(
             "Content-Type": "application/json",
         }
 
-        async with httpx.AsyncClient() as client:
+        proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY") or os.environ.get("ALL_PROXY")
+        async with httpx.AsyncClient(proxy=proxy) as client:
             response = await client.post(
                 endpoint, headers=headers, json=payload, timeout=10.0
             )
